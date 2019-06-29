@@ -28,9 +28,6 @@ namespace MovieRentals.Controllers
             return View(movie);
         }
 
-
-
-
         private IEnumerable<Movie> GetMovies()
         {
             return new List<Movie>
