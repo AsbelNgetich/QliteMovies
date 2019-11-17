@@ -43,6 +43,17 @@ namespace MovieRentals.Controllers
 
             return View(customer);
         }
+        public ActionResult New()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+
+            return View("CustomerForm", viewModel);
+
+        }
 
         public ActionResult CustomerForm()
         {
@@ -82,6 +93,7 @@ namespace MovieRentals.Controllers
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
+
                 return HttpNotFound();
 
             var viewModel = new CustomerFormViewModel
