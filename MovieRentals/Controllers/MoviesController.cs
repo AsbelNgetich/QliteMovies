@@ -64,8 +64,6 @@ namespace MovieRentals.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            return View(movie);
-
             var viewModel = new MovieFormViewModel
             {
                 Movie = movie,

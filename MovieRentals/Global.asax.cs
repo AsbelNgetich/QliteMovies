@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
+using MovieRentals.App_Start;
 
 namespace MovieRentals
 {
@@ -13,7 +14,7 @@ namespace MovieRentals
     {
         protected void Application_Start()
         {
-          //  GlobalConfiguration.Configure(webApiConfig.Register);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
