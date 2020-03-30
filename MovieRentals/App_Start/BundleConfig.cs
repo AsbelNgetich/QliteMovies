@@ -12,6 +12,7 @@ namespace MovieRentals
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/bootstrap.js",
+                        "~/Scripts/bootbox.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js"));
 
