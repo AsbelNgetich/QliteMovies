@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieRentals.Models;
 using MovieRentals.ViewModels;
+using System.Runtime.Caching;
 
 namespace MovieRentals.Controllers
 {
@@ -26,6 +27,14 @@ namespace MovieRentals.Controllers
 
         public ViewResult Index()
         {
+            if(MemoryCache.Default["Genres"]==null)
+            {
+                MemoryCache.Default["Genres"] = _context.Genres.ToList();
+            }
+         
+            // Since your gonna be getting an object, you cast it to IEnumerable of Genre
+            var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
+
             //  var customers = _context.Customers.Include(c => c.MembershipType).ToList();
             if (User.IsInRole(RoleName.CanManageMovies))
                 return View();
