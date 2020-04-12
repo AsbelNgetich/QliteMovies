@@ -54,9 +54,9 @@ namespace MovieRentals
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "210578343581142",
+               appSecret: "b8df6ecf1c43d96293a860c4ffd4f6bd");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

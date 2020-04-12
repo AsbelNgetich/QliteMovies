@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MovieRentals.Models;
 using MovieRentals.ViewModels;
+using System.Runtime.Caching;
 
 namespace MovieRentals.Controllers
 {
@@ -26,9 +27,18 @@ namespace MovieRentals.Controllers
 
         public ViewResult Index()
         {
-          //  var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            if(MemoryCache.Default["Genres"]==null)
+            {
+                MemoryCache.Default["Genres"] = _context.Genres.ToList();
+            }
+         
+            // Since your gonna be getting an object, you cast it to IEnumerable of Genre
+            var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
 
-            return View();
+            //  var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View();
+            return View("ReadOnlyList");
         }
 
 
@@ -43,6 +53,8 @@ namespace MovieRentals.Controllers
 
             return View(customer);
         }
+
+       [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -89,6 +101,7 @@ namespace MovieRentals.Controllers
 
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
